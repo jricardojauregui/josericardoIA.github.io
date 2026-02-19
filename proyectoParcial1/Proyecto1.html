@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Proyecto Parcial 1 — Determinantes del Ingreso en Hogares Mexicanos</title>
+<style>
+  body{font-family:'Segoe UI',sans-serif;max-width:980px;margin:40px auto;padding:0 24px;color:#222;line-height:1.8}
+  h1{color:#1a3a5c;border-bottom:3px solid #1a3a5c;padding-bottom:10px;font-size:1.7em}
+  h2{color:#2a5f8f;margin-top:50px;border-left:5px solid #2a5f8f;padding-left:14px;font-size:1.25em}
+  h3{color:#333;margin-top:28px;font-size:1.05em}
+  .meta{background:#f0f4f8;padding:14px 22px;border-radius:8px;font-size:.95em;margin-bottom:28px;border-left:5px solid #2a5f8f}
+  .obs{background:#e8f4fd;border-left:4px solid #2a5f8f;padding:12px 18px;border-radius:4px;margin:16px 0}
+  .conc{background:#e8f5e9;border-left:4px solid #2e7d32;padding:12px 18px;border-radius:4px;margin:16px 0}
+  .warn{background:#fff8e1;border-left:4px solid #f0a500;padding:10px 16px;border-radius:4px;margin:14px 0}
+  table{border-collapse:collapse;width:100%;font-size:.88em;margin:14px 0}
+  th{background:#1a3a5c;color:white;padding:9px 14px;text-align:left}
+  td{border:1px solid #ddd;padding:8px 14px}
+  tr:nth-child(even){background:#f5f9ff}
+  tr.winner{background:#e8f5e9;font-weight:bold}
+  code{background:#f0f0f0;padding:2px 7px;border-radius:3px;font-size:.88em;font-family:monospace}
+  pre{background:#1e1e2e;color:#cdd6f4;padding:16px 20px;border-radius:8px;overflow-x:auto;font-size:.85em;line-height:1.6}
+  .mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:22px 0}
+  .mc{background:#1a3a5c;color:white;border-radius:10px;padding:16px 18px;text-align:center}
+  .mc.l{background:#4a7fb5}.mc.g{background:#2e7d32}
+  .mc .v{font-size:1.75em;font-weight:bold}
+  .mc .lb{font-size:.8em;opacity:.85;margin-top:4px}
+  .badge{display:inline-block;background:#2e7d32;color:white;border-radius:20px;padding:3px 12px;font-size:.82em;font-weight:bold;margin-left:8px}
+  .honor{border:2px solid #1a3a5c;border-radius:8px;padding:14px 22px;margin-top:56px;text-align:center;color:#1a3a5c;font-weight:500}
+  .ref{font-size:.83em;color:#555;margin-top:28px;line-height:1.9}
+  .step{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:12px 18px;margin:10px 0;font-size:.92em}
+  .toc{background:#f8fafc;border:1px solid #dce3ea;border-radius:8px;padding:16px 22px;margin-bottom:32px}
+  .toc a{color:#2a5f8f;text-decoration:none;display:block;padding:3px 0}
+  .toc a:hover{text-decoration:underline}
+  .eq{background:#1a3a5c;color:#fff;padding:12px 20px;border-radius:8px;font-family:monospace;font-size:.95em;margin:16px 0;overflow-x:auto}
+</style>
+</head>
+<body>
 
+<h1>Proyecto Parcial 1 — Determinantes del Ingreso en Hogares Mexicanos</h1>
+<div class="meta">
+  <strong>Autor:</strong> José Ricardo Jáuregui Guevara &nbsp;|&nbsp; <strong>Matrícula:</strong> 608995<br>
+  Universidad de Monterrey — Escuela de Ingeniería y Tecnologías &nbsp;|&nbsp; Enero–Febrero 2026
+</div>
+
+<div class="toc">
+  <strong>Índice</strong><br>
+  <a href="#planteamiento">1. Planteamiento del problema y contexto de los datos</a>
+  <a href="#exploracion">2. Exploración inicial de los datos</a>
+  <a href="#limpieza">3. Preparación y limpieza de datos</a>
+  <a href="#seleccion">4. Selección de características</a>
+  <a href="#modelos">5. Construcción y comparación de modelos</a>
+  <a href="#inferencia">6. Análisis de inferencia</a>
+  <a href="#whatif">7. Análisis What-If (Puntos extra)</a>
+  <a href="#conclusiones">8. Conclusiones</a>
+  <a href="#referencias">9. Referencias</a>
+</div>
+
+<h2 id="planteamiento">1. Planteamiento del Problema y Contexto de los Datos</h2>
+<p>En México, la desigualdad en los ingresos de los hogares es un tema de alta relevancia social y económica. Comprender qué características están asociadas con mayores o menores niveles de ingreso permite generar evidencia útil para la toma de decisiones y el diseño de intervenciones focalizadas.</p>
+
+<p>Los datos provienen de la <strong>Encuesta Nacional de Ingresos y Gastos de los Hogares (ENIGH) 2014</strong> del INEGI, una fuente oficial con diseño muestral probabilístico y representativo a nivel nacional. La <strong>variable objetivo</strong> es <code>ing_cor</code> (ingreso corriente total del hogar), transformada logarítmicamente como <code>log_ing_cor</code> para corregir la fuerte asimetría positiva.</p>
+
+<div class="obs"><strong>Enfoque:</strong> Regresión supervisada — la variable objetivo es cuantitativa continua y se busca modelar su relación con múltiples variables explicativas del hogar (características del jefe, composición demográfica, condiciones socioeconómicas).</div>
+
+<h2 id="exploracion">2. Exploración Inicial de los Datos</h2>
+<p>El dataset contiene <strong>58,125 hogares</strong> y <strong>59 variables</strong>: 23 enteras, 35 flotantes y 1 categórica (<code>ageb</code>). Ninguna variable presenta valores nulos.</p>
+
+<h3>Diccionario de Variables (Selección)</h3>
+<table>
+  <tr><th>Variable</th><th>Descripción</th><th>Tipo</th></tr>
+  <tr><td><code>ing_cor</code> ⭐</td><td>Ingreso corriente total del hogar (objetivo)</td><td>Float</td></tr>
+  <tr><td><code>educa_jefe</code></td><td>Nivel de escolaridad del jefe del hogar</td><td>Int</td></tr>
+  <tr><td><code>est_socio</code></td><td>Estrato socioeconómico</td><td>Int</td></tr>
+  <tr><td><code>edad_jefe</code></td><td>Edad del jefe del hogar (años)</td><td>Int</td></tr>
+  <tr><td><code>sexo_jefe</code></td><td>Sexo del jefe del hogar</td><td>Int</td></tr>
+  <tr><td><code>ocupados</code></td><td>Número de integrantes ocupados</td><td>Int</td></tr>
+  <tr><td><code>tot_integ</code></td><td>Total de integrantes del hogar</td><td>Int</td></tr>
+  <tr><td><code>tam_loc</code></td><td>Tamaño de la localidad</td><td>Int</td></tr>
+  <tr><td><code>percep_ing</code></td><td>Número de perceptores de ingreso</td><td>Int</td></tr>
+  <tr><td><code>clase_hog</code></td><td>Tipo de hogar según composición</td><td>Int</td></tr>
+</table>
+
+<h3>Estadísticas Descriptivas Clave</h3>
+<table>
+  <tr><th>Variable</th><th>Media</th><th>Desv. Est.</th><th>Min</th><th>Max</th></tr>
+  <tr><td><code>ing_cor</code></td><td>38,213</td><td>70,876</td><td>0</td><td>~4.4M</td></tr>
+  <tr><td><code>edad_jefe</code></td><td>48.8</td><td>15.7</td><td>14</td><td>97</td></tr>
+  <tr><td><code>educa_jefe</code></td><td>5.53</td><td>3.03</td><td>0</td><td>11</td></tr>
+  <tr><td><code>tot_integ</code></td><td>3.72</td><td>2.01</td><td>1</td><td>19</td></tr>
+  <tr><td><code>ocupados</code></td><td>1.54</td><td>1.19</td><td>0</td><td>13</td></tr>
+</table>
+
+<div class="obs"><strong>Observación:</strong> El ingreso corriente presenta media de ~38K vs mediana mucho menor, con desviación estándar de 70K — fuerte asimetría positiva y valores extremos consistentes con la desigualdad real. Se aplicó transformación logarítmica (<code>log_ing_cor = log1p(ing_cor)</code>) para estabilizar la varianza.</div>
+
+<h2 id="limpieza">3. Preparación y Limpieza de Datos</h2>
+
+<div class="step">✅ <strong>Valores nulos:</strong> Ninguna variable presenta datos faltantes en las 58,125 observaciones.</div>
+<div class="step">🗑️ <strong>Eliminación de IDs:</strong> Se descartaron <code>proyecto, folioviv, foliohog, ubica_geo, ageb, est_dis, upm</code> — claves únicas sin valor predictivo.</div>
+<div class="step">📊 <strong>Transformación logarítmica:</strong> <code>log_ing_cor = log1p(ing_cor)</code> reduce la asimetría y estabiliza la varianza. Interpretación: los coeficientes representan variaciones porcentuales en el ingreso.</div>
+<div class="step">🔍 <strong>Multicolinealidad:</strong> Los componentes específicos del ingreso (sueldos, aguinaldo, rentas, etc.) se excluyeron para evitar redundancia perfecta con la variable objetivo.</div>
+
+<h2 id="seleccion">4. Selección de Características</h2>
+<p>Se excluyeron los componentes de ingreso (generarían multicolinealidad perfecta), el diseño muestral y el target. De las variables candidatas restantes se aplicaron <strong>tres métodos de selección</strong>:</p>
+
+<table>
+  <tr><th>Método</th><th>Lógica</th><th>α</th></tr>
+  <tr><td><strong>Backward Elimination</strong></td><td>Empieza con todas las variables, elimina la menos significativa iterativamente</td><td>0.05</td></tr>
+  <tr><td><strong>Forward Selection</strong></td><td>Empieza sin variables, agrega la más significativa iterativamente</td><td>0.05</td></tr>
+  <tr><td><strong>Stepwise</strong></td><td>Combina ambos: agrega y puede eliminar en cada paso</td><td>in=0.05 / out=0.10</td></tr>
+</table>
+
+<h3>Núcleo Estable — Variables Seleccionadas por los 3 Métodos</h3>
+<table>
+  <tr><th>#</th><th>Variable</th><th>Descripción</th><th>Corr. con log_ing_cor</th></tr>
+  <tr><td>1</td><td><code>educa_jefe</code></td><td>Nivel educativo del jefe</td><td>+0.440</td></tr>
+  <tr><td>2</td><td><code>est_socio</code></td><td>Estrato socioeconómico</td><td>+0.433</td></tr>
+  <tr><td>3</td><td><code>ocupados</code></td><td>Integrantes ocupados</td><td>+0.35~</td></tr>
+  <tr><td>4</td><td><code>mayores</code></td><td>Integrantes ≥18 años</td><td>+</td></tr>
+  <tr><td>5</td><td><code>edad_jefe</code></td><td>Edad del jefe</td><td>+</td></tr>
+  <tr><td>6</td><td><code>percep_ing</code></td><td>Perceptores de ingreso</td><td>+</td></tr>
+  <tr><td>7</td><td><code>tam_loc</code></td><td>Tamaño de localidad</td><td>−</td></tr>
+  <tr><td>8</td><td><code>clase_hog</code></td><td>Tipo de hogar</td><td>+</td></tr>
+  <tr><td>9</td><td><code>sexo_jefe</code></td><td>Sexo del jefe</td><td>−</td></tr>
+  <tr><td>10</td><td><code>p12_64</code></td><td>Personas de 12–64 años</td><td>+</td></tr>
+</table>
+
+<div class="obs"><strong>Validez:</strong> La convergencia de los tres métodos hacia las mismas variables refuerza la robustez de la selección. Las variables son coherentes con la literatura económica: capital humano, participación laboral, estructura demográfica y contexto geográfico.</div>
+
+<h2 id="modelos">5. Construcción y Comparación de Modelos</h2>
+<p>División: <strong>80% entrenamiento / 20% prueba</strong> | <code>random_state=0</code> | Variable objetivo: <code>log_ing_cor</code></p>
+
+<h3>Modelo 1 — Regresión Lineal Múltiple (OLS)</h3>
+<div class="eq">log_ing_cor = 7.9657 + 0.1270·educa_jefe + 0.2524·est_socio + 0.1939·ocupados + 0.0211·mayores + 0.0070·edad_jefe + 0.0738·percep_ing − 0.0799·tam_loc + 0.0400·clase_hog − 0.0489·sexo_jefe + 0.0438·p12_64</div>
+
+<h3>Modelo 2 — Random Forest Base</h3>
+<p>Configuración por defecto de sklearn (<code>n_estimators=100</code>, sin restricciones de profundidad).</p>
+
+<h3>Modelo 3 — Random Forest Optimizado <span class="badge">✅ MEJOR</span></h3>
+<p>Optimización con <code>RandomizedSearchCV</code> (10 iteraciones, 5-fold CV). Parámetros finales:</p>
+<code>max_depth=10 | min_samples_leaf=2 | min_samples_split=14 | n_estimators=1000 | criterion=friedman_mse</code>
+
+<h3>Tabla Comparativa de Resultados</h3>
+<table>
+  <tr><th>Modelo</th><th>R² Train</th><th>R² Test</th><th>Brecha</th><th>RMSE Test</th><th>MAE Test</th></tr>
+  <tr><td>Regresión Lineal</td><td>0.4407</td><td>0.4387</td><td>0.0020</td><td>0.6719</td><td>0.4997</td></tr>
+  <tr><td>RF Base</td><td>0.8494</td><td>0.3596</td><td>0.4898</td><td>0.7176</td><td>0.5331</td></tr>
+  <tr class="winner"><td>✅ RF Optimizado</td><td>0.5386</td><td>0.4676</td><td>0.0710</td><td>0.6543</td><td>0.4843</td></tr>
+</table>
+
+<div class="mg">
+  <div class="mc"><div class="v">0.4676</div><div class="lb">R² Prueba (RF Opt.)</div></div>
+  <div class="mc l"><div class="v">0.6543</div><div class="lb">RMSE Prueba</div></div>
+  <div class="mc g"><div class="v">7.1%</div><div class="lb">Brecha Train/Test</div></div>
+  <div class="mc l"><div class="v">0.4843</div><div class="lb">MAE Prueba</div></div>
+</div>
+
+<div class="obs">
+  <strong>¿Por qué el RF Optimizado es el mejor?</strong><br>
+  (1) Mayor R² en prueba (0.4676) — explica 46.8% de la variabilidad en datos no vistos.<br>
+  (2) Menor RMSE (0.6543) y MAE (0.4843) — predicciones más cercanas al valor real.<br>
+  (3) Brecha de solo 7.1% — la optimización corrigió el sobreajuste severo del RF base (49%).
+</div>
+
+<h3>Importancia de Variables — RF Optimizado</h3>
+<table>
+  <tr><th>Variable</th><th>Importancia</th><th>Interpretación</th></tr>
+  <tr><td><code>educa_jefe</code></td><td>0.3314</td><td>Capital humano: mayor educación → mayor ingreso</td></tr>
+  <tr><td><code>ocupados</code></td><td>0.2312</td><td>Participación laboral del hogar</td></tr>
+  <tr><td><code>est_socio</code></td><td>0.1772</td><td>Posición socioeconómica estructural</td></tr>
+  <tr><td><code>percep_ing</code></td><td>0.0738</td><td>Diversificación de fuentes de ingreso</td></tr>
+  <tr><td><code>edad_jefe</code></td><td>~0.06</td><td>Efecto ciclo de vida laboral</td></tr>
+</table>
+
+<h2 id="inferencia">6. Análisis de Inferencia (OLS con errores robustos HC3)</h2>
+<p>Se ajustó un modelo OLS con errores estándar robustos HC3 para obtener estimaciones confiables incluso con heterocedasticidad.</p>
+
+<table>
+  <tr><th>Variable</th><th>Coeficiente (β)</th><th>Efecto en ing_cor real</th><th>P-valor</th></tr>
+  <tr><td><code>est_socio</code></td><td>+0.256</td><td>+29.2% por estrato</td><td>&lt;0.001</td></tr>
+  <tr><td><code>ocupados</code></td><td>+0.196</td><td>+21.6% por ocupado adicional</td><td>&lt;0.001</td></tr>
+  <tr><td><code>educa_jefe</code></td><td>+0.127</td><td>+13.5% por nivel educativo</td><td>&lt;0.001</td></tr>
+  <tr><td><code>percep_ing</code></td><td>+0.074</td><td>+7.7% por perceptor adicional</td><td>&lt;0.001</td></tr>
+  <tr><td><code>sexo_jefe</code></td><td>−0.049</td><td>−5.1% (hogares encabezados por mujeres)</td><td>&lt;0.001</td></tr>
+  <tr><td><code>tam_loc</code></td><td>−0.080</td><td>−7.3% (localidades más pequeñas)</td><td>&lt;0.001</td></tr>
+</table>
+
+<div class="obs">Todas las variables son estadísticamente significativas (p &lt; 0.001). Los intervalos de confianza al 95% son angostos gracias al gran tamaño muestral (n=58,125). No se usó Random Forest para inferencia porque no permite calcular p-valores ni intervalos de confianza individuales.</div>
+
+<h2 id="whatif">7. Análisis What-If (Puntos Extra)</h2>
+<p>Usando el <strong>RF Optimizado</strong> y un hogar de referencia (valores promedio de todas las variables):</p>
+
+<table>
+  <tr><th>Escenario</th><th>Cambio</th><th>Ingreso estimado</th></tr>
+  <tr><td>Hogar base (promedio)</td><td>—</td><td>Referencia</td></tr>
+  <tr><td>+1 nivel educativo del jefe</td><td><code>educa_jefe += 1</code></td><td>↑ Incremento positivo</td></tr>
+  <tr><td>+1 integrante ocupado</td><td><code>ocupados += 1</code></td><td>Efecto no lineal</td></tr>
+  <tr><td>Ciudad grande</td><td><code>tam_loc = 1</code></td><td>↑ Incremento notable</td></tr>
+</table>
+
+<div class="obs">Los resultados muestran asociaciones predictivas, no causalidad directa. El RF captura interacciones entre variables, por lo que el efecto de una variable depende del perfil completo del hogar.</div>
+
+<h2 id="conclusiones">8. Conclusiones</h2>
+<div class="conc">
+  <p>El <strong>Random Forest Optimizado</strong> es el modelo con mejor balance entre precisión y generalización (R²=0.47, RMSE=0.65, brecha=7.1%). Explica el 47% de las diferencias en el ingreso logarítmico — valor típico para estudios de encuestas de hogares en países de ingreso medio.</p>
+  
+  <p><strong>Hallazgos principales:</strong></p>
+  <ul>
+    <li>En el modelo no lineal (RF): <strong>educa_jefe</strong> es el predictor más importante (importancia 0.33).</li>
+    <li>En el modelo lineal (OLS): <strong>est_socio</strong> tiene el mayor efecto marginal controlado (+29.2%).</li>
+    <li>Hogares con jefas mujeres tienen ~5.1% menos ingreso; hogares rurales ~7.3% menos.</li>
+    <li>La convergencia de los tres métodos de selección hacia las mismas variables refuerza la robustez del análisis.</li>
+  </ul>
+
+  <p><strong>Limitaciones:</strong> Dataset de 2014 (puede haber cambios estructurales), no implica causalidad, 53% de variabilidad aún sin explicar.</p>
+</div>
+
+<div class="honor">He realizado este proyecto con integridad académica.</div>
+
+<div class="ref" id="referencias">
+  <h2>9. Referencias</h2>
+  INEGI (2014). <em>ENIGH 2014 — Principales variables por hogar</em>. https://www.inegi.org.mx/programas/enigh/nc/2014/<br>
+  Pedregosa et al. (2011). <em>Scikit-learn: Machine learning in Python</em>. JMLR.<br>
+  Seabold & Perktold (2010). <em>Statsmodels</em>. https://www.statsmodels.org<br>
+  Breiman, L. (2001). <em>Random Forests</em>. Machine Learning, 45(1), 5–32.<br>
+  White, H. (1980). <em>A heteroskedasticity-consistent covariance matrix estimator</em>. Econometrica.<br>
+  CONEVAL (2023). <em>Metodología para la medición multidimensional de la pobreza en México</em>. https://www.coneval.org.mx<br>
+  UDEM (2026). Presentaciones del curso — Dr. Antonio Martínez Torteya.
+</div>
+
+</body>
+</html>
