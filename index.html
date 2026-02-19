@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portafolio — José Ricardo Jáuregui Guevara | 608995</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #0f1117;
+    color: #e2e8f0;
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1a3a5c 0%, #2a5f8f 50%, #1e4976 100%);
+    padding: 70px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(100,180,255,0.12) 0%, transparent 60%);
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 5px 16px;
+    font-size: .8em;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    color: #93c5fd;
+  }
+  .hero h1 {
+    font-size: clamp(1.8em, 5vw, 2.8em);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero .subtitle {
+    font-size: 1.05em;
+    color: #bfdbfe;
+    margin-bottom: 6px;
+  }
+  .hero .meta {
+    font-size: .88em;
+    color: #93c5fd;
+    opacity: .85;
+  }
+
+  /* ── STATS BAR ── */
+  .stats {
+    background: #1e2433;
+    border-bottom: 1px solid #2d3748;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+  }
+  .stat {
+    padding: 18px 40px;
+    text-align: center;
+    border-right: 1px solid #2d3748;
+  }
+  .stat:last-child { border-right: none; }
+  .stat .n { font-size: 1.8em; font-weight: 700; color: #60a5fa; }
+  .stat .l { font-size: .78em; color: #94a3b8; text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 24px 80px;
+  }
+
+  .section-title {
+    font-size: 1.35em;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin-bottom: 28px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #2d3748;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon { font-size: 1.1em; }
+
+  /* ── CARDS GRID ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+    margin-bottom: 56px;
+  }
+
+  .card {
+    background: #1a2035;
+    border: 1px solid #2d3748;
+    border-radius: 14px;
+    padding: 28px 26px;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .card.activity::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+  .card.project::before  { background: linear-gradient(90deg, #10b981, #34d399); }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: #3b82f6;
+    box-shadow: 0 12px 40px rgba(59,130,246,0.15);
+  }
+  .card.project:hover { border-color: #10b981; box-shadow: 0 12px 40px rgba(16,185,129,0.15); }
+
+  .card-type {
+    font-size: .72em;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .card.activity .card-type { color: #60a5fa; }
+  .card.project  .card-type { color: #34d399; }
+
+  .card h3 {
+    font-size: 1.08em;
+    font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .card .desc {
+    font-size: .88em;
+    color: #94a3b8;
+    line-height: 1.65;
+    margin-bottom: 18px;
+    flex: 1;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .tag {
+    background: #0f1827;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: .75em;
+    color: #94a3b8;
+  }
+
+  .card-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: .82em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s, transform .15s;
+  }
+  .btn:hover { opacity: .88; transform: translateY(-1px); }
+  .btn-primary   { background: #2563eb; color: #fff; }
+  .btn-secondary { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
+  .btn-green     { background: #059669; color: #fff; }
+
+  .card .r2-badge {
+    position: absolute;
+    top: 18px; right: 18px;
+    background: #10b981;
+    color: #fff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: .75em;
+    font-weight: 700;
+  }
+
+  /* ── TECH STACK ── */
+  .tech-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 56px;
+  }
+  .tech-pill {
+    background: #1e2433;
+    border: 1px solid #2d3748;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: .88em;
+    color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tech-pill .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+  }
+  .tech-pill .dot.green { background: #10b981; }
+  .tech-pill .dot.yellow { background: #f59e0b; }
+
+  footer {
+    text-align: center;
+    padding: 30px 24px;
+    border-top: 1px solid #1e2433;
+    color: #475569;
+    font-size: .85em;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">📊 Portafolio Académico · Parcial 1</div>
+  <h1>José Ricardo Jáuregui Guevara</h1>
+  <p class="subtitle">Estadística y Ciencia de Datos</p>
+  <p class="meta">Matrícula: 608995 &nbsp;·&nbsp; Universidad de Monterrey &nbsp;·&nbsp; Escuela de Ingeniería y Tecnologías &nbsp;·&nbsp; 2026</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="n">4</div><div class="l">Entregas</div></div>
+  <div class="stat"><div class="n">3</div><div class="l">Actividades</div></div>
+  <div class="stat"><div class="n">1</div><div class="l">Proyecto</div></div>
+  <div class="stat"><div class="n">58K+</div><div class="l">Filas analizadas</div></div>
+</div>
+
+<main>
+
+  <!-- ACTIVIDADES -->
+  <div class="section-title"><span class="icon">📋</span> Actividades</div>
+  <div class="grid">
+
+    <div class="card activity">
+      <div class="card-type">Actividad 1.1</div>
+      <h3>Exploración Inicial de Datos — Obesidad</h3>
+      <p class="desc">Análisis exploratorio del dataset de sobrepeso y obesidad (2,111 personas, 10 variables). Clasificación de variables, detección de nulos, distribución de la variable dependiente, cálculo de BMI y análisis gráfico en subpoblación masculina.</p>
+      <div class="tags">
+        <span class="tag">EDA</span>
+        <span class="tag">Visualización</span>
+        <span class="tag">BMI derivado</span>
+        <span class="tag">Pandas</span>
+      </div>
+      <div class="card-links">
+        <a href="Actividad1_1/Actividad1_1.html" class="btn btn-primary">🌐 Ver Reporte</a>
+        <a href="Actividad1_1/Actividad1_1.ipynb" class="btn btn-secondary">📓 Notebook</a>
+        <a href="Actividad1_1/README.md" class="btn btn-secondary">📄 README</a>
+      </div>
+    </div>
+
+    <div class="card activity">
+      <div class="card-type">Actividad 1.2</div>
+      <h3>Regresión Lineal — Felicidad y GDP</h3>
+      <p class="desc">Modelos de regresión lineal simple y múltiple para predecir el nivel de felicidad de 141 países. El modelo simple (GDP) obtiene R²≈0.03; el múltiple con variables del World Happiness Report alcanza R²≈0.69.</p>
+      <div class="tags">
+        <span class="tag">Regresión Simple</span>
+        <span class="tag">Regresión Múltiple</span>
+        <span class="tag">R²</span>
+        <span class="tag">Scikit-learn</span>
+      </div>
+      <div class="card-links">
+        <a href="Actividad1_2/Actividad1_2.html" class="btn btn-primary">🌐 Ver Reporte</a>
+        <a href="Actividad1_2/Actividad1_2.ipynb" class="btn btn-secondary">📓 Notebook</a>
+        <a href="Actividad1_2/README.md" class="btn btn-secondary">📄 README</a>
+      </div>
+    </div>
+
+    <div class="card activity">
+      <div class="card-type">Actividad 1.3</div>
+      <h3>Regresión Lineal Múltiple — Calificaciones</h3>
+      <p class="desc">Predicción de la calificación final (G3) de 395 estudiantes. Incluye Label Encoding, selección de variables por significancia estadística (OLS), evaluación con R², RMSE y MAPE, e interpretación de coeficientes.</p>
+      <div class="tags">
+        <span class="tag">Label Encoding</span>
+        <span class="tag">OLS</span>
+        <span class="tag">RMSE</span>
+        <span class="tag">Statsmodels</span>
+      </div>
+      <div class="card-links">
+        <a href="Actividad1_3/Actividad1_3.html" class="btn btn-primary">🌐 Ver Reporte</a>
+        <a href="Actividad1_3/Actividad1_3.ipynb" class="btn btn-secondary">📓 Notebook</a>
+        <a href="Actividad1_3/README.md" class="btn btn-secondary">📄 README</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROYECTO -->
+  <div class="section-title"><span class="icon">🏠</span> Proyecto Parcial 1</div>
+  <div class="grid">
+
+    <div class="card project" style="grid-column: 1 / -1; max-width: 100%;">
+      <div class="r2-badge">R² = 0.47</div>
+      <div class="card-type">Proyecto Final · Parcial 1</div>
+      <h3>Determinantes del Ingreso en Hogares Mexicanos (ENIGH 2014)</h3>
+      <p class="desc">
+        Análisis completo de los determinantes socioeconómicos del ingreso corriente total (<code>ing_cor</code>) de <strong>58,125 hogares mexicanos</strong> usando la ENIGH 2014 del INEGI. El flujo incluye exploración, limpieza, transformación logarítmica, selección de variables con tres métodos (backward, forward, stepwise), construcción y comparación de tres modelos (Regresión Lineal, Random Forest base, Random Forest optimizado con RandomizedSearchCV), inferencia estadística con OLS HC3 y análisis de escenarios what-if.
+        <br><br>
+        <strong>Modelo ganador:</strong> Random Forest Optimizado (R²=0.47, RMSE=0.65, brecha=7.1%). Variables clave: educación del jefe, estrato socioeconómico, ocupados del hogar, tamaño de localidad y sexo del jefe.
+      </p>
+      <div class="tags">
+        <span class="tag">ENIGH 2014</span>
+        <span class="tag">Backward/Forward/Stepwise</span>
+        <span class="tag">Random Forest</span>
+        <span class="tag">RandomizedSearchCV</span>
+        <span class="tag">OLS HC3</span>
+        <span class="tag">What-If Analysis</span>
+        <span class="tag">58,125 hogares</span>
+      </div>
+      <div class="card-links">
+        <a href="Proyecto1/Proyecto1.html" class="btn btn-green">🌐 Ver Reporte</a>
+        <a href="Proyecto1/Proyecto1.ipynb" class="btn btn-secondary">📓 Notebook</a>
+        <a href="Proyecto1/README.md" class="btn btn-secondary">📄 README</a>
+        <a href="https://www.inegi.org.mx/programas/enigh/nc/2014/" target="_blank" class="btn btn-secondary">🔗 Dataset (INEGI)</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TECH STACK -->
+  <div class="section-title"><span class="icon">🛠️</span> Tecnologías Utilizadas</div>
+  <div class="tech-grid">
+    <div class="tech-pill"><span class="dot"></span> Python 3</div>
+    <div class="tech-pill"><span class="dot"></span> Pandas</div>
+    <div class="tech-pill"><span class="dot"></span> NumPy</div>
+    <div class="tech-pill"><span class="dot yellow"></span> Matplotlib</div>
+    <div class="tech-pill"><span class="dot yellow"></span> Seaborn</div>
+    <div class="tech-pill"><span class="dot green"></span> Scikit-learn</div>
+    <div class="tech-pill"><span class="dot green"></span> Statsmodels</div>
+    <div class="tech-pill"><span class="dot green"></span> Random Forest</div>
+    <div class="tech-pill"><span class="dot"></span> Jupyter Notebook</div>
+    <div class="tech-pill"><span class="dot"></span> GitHub Pages</div>
+  </div>
+
+</main>
+
+<footer>
+  José Ricardo Jáuregui Guevara · 608995 · Universidad de Monterrey · 2026 &nbsp;|&nbsp;
+  Todos los análisis realizados con integridad académica.
+</footer>
+
+</body>
+</html>
