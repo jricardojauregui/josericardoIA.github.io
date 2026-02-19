@@ -2,25 +2,88 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Actividad 1.1 — Exploración de Datos: Obesidad</title>
 <style>
-  body { font-family: 'Segoe UI', sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; color: #222; line-height: 1.7; }
-  h1 { color: #1a3a5c; border-bottom: 3px solid #1a3a5c; padding-bottom: 8px; }
-  h2 { color: #2a5f8f; margin-top: 40px; }
-  h3 { color: #444; }
-  .meta { background: #f0f4f8; padding: 12px 20px; border-radius: 6px; font-size: 0.95em; }
-  .obs { background: #e8f4fd; border-left: 4px solid #2a5f8f; padding: 10px 16px; border-radius: 4px; margin: 16px 0; }
-  img { max-width: 100%; border: 1px solid #ddd; border-radius: 6px; margin: 16px 0; }
-  table { border-collapse: collapse; width: 100%; font-size: 0.9em; }
-  th { background: #2a5f8f; color: white; padding: 8px; }
-  td { border: 1px solid #ddd; padding: 7px 10px; }
-  tr:nth-child(even) { background: #f5f9ff; }
-  code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-size: 0.92em; }
-  .honor { border: 2px solid #2a5f8f; border-radius: 6px; padding: 12px 20px; margin-top: 50px; text-align: center; color: #1a3a5c; }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1117; color: #e2e8f0; min-height: 100vh; }
+  .page-content { max-width: 980px; margin: 0 auto; padding: 44px 24px 80px; }
+  h1 { color: #f1f5f9; border-bottom: 2px solid #1f2937; padding-bottom: 10px; font-size: 1.55em; margin-bottom: 6px; }
+  h2 { color: #60a5fa; margin-top: 44px; border-left: 4px solid #2563eb; padding-left: 12px; font-size: 1.15em; }
+  h3 { color: #cbd5e1; margin-top: 24px; font-size: 1em; }
+  .meta-bar { background: #1a2035; border: 1px solid #1f2937; border-radius: 8px; padding: 12px 18px; font-size: .88em; color: #94a3b8; margin: 18px 0 28px; }
+  .meta-bar strong { color: #cbd5e1; }
+  .obs { background: #0f1f35; border-left: 4px solid #2563eb; padding: 12px 18px; border-radius: 4px; margin: 16px 0; font-size: .93em; }
+  .conc { background: #0d1f15; border-left: 4px solid #10b981; padding: 12px 18px; border-radius: 4px; margin: 16px 0; font-size: .93em; }
+  img { max-width: 100%; border: 1px solid #1f2937; border-radius: 8px; margin: 14px 0; display: block; }
+  table { border-collapse: collapse; width: 100%; font-size: .87em; margin: 14px 0; }
+  th { background: #1e2d47; color: #93c5fd; padding: 9px 14px; text-align: left; border: 1px solid #1f2937; }
+  td { border: 1px solid #1f2937; padding: 8px 14px; color: #cbd5e1; }
+  tr:nth-child(even) { background: #141c2e; }
+  tr.winner { background: #0d2218; }
+  tr.winner td { color: #6ee7b7; font-weight: 600; }
+  code { background: #1e2433; color: #93c5fd; padding: 2px 7px; border-radius: 4px; font-size: .88em; font-family: monospace; border: 1px solid #2d3748; }
+  .equation { background: #1e2433; color: #a5f3fc; padding: 12px 20px; border-radius: 8px; font-family: monospace; font-size: .9em; margin: 16px 0; border: 1px solid #2d3748; overflow-x: auto; }
+  .mg { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin: 20px 0; }
+  .mc { background: #1e2d47; border: 1px solid #2d3748; border-radius: 10px; padding: 14px 16px; text-align: center; }
+  .mc.g { background: #0d2218; border-color: #065f46; }
+  .mc .v { font-size: 1.6em; font-weight: 700; color: #60a5fa; }
+  .mc.g .v { color: #6ee7b7; }
+  .mc .lb { font-size: .76em; color: #64748b; margin-top: 4px; }
+  .honor { border: 1px solid #2d3748; border-radius: 8px; padding: 14px 22px; margin-top: 50px; text-align: center; color: #64748b; font-size: .9em; }
+  .ref { font-size: .83em; color: #475569; margin-top: 28px; line-height: 2; }
+  .ref a { color: #60a5fa; }
+  .badge { display: inline-block; background: #065f46; color: #6ee7b7; border-radius: 20px; padding: 2px 10px; font-size: .75em; font-weight: 700; margin-left: 6px; border: 1px solid #10b981; }
+  .toc { background: #141c2e; border: 1px solid #1f2937; border-radius: 8px; padding: 16px 22px; margin-bottom: 32px; }
+  .toc a { color: #60a5fa; text-decoration: none; display: block; padding: 3px 0; font-size: .9em; }
+  .toc a:hover { color: #93c5fd; }
+  .toc strong { color: #94a3b8; font-size: .82em; text-transform: uppercase; letter-spacing: .06em; }
+
+
+  /* NAV */
+  .nav {
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    min-height: 54px;
+  }
+  .nav-home {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: .88em;
+    font-weight: 600;
+    padding: 16px 20px 16px 0;
+    border-right: 1px solid #1f2937;
+    margin-right: 20px;
+    white-space: nowrap;
+    transition: color .2s;
+  }
+  .nav-home:hover { color: #93c5fd; }
+  .nav-home .arrow { font-size: 1.1em; }
+  .nav-crumb {
+    color: #6b7280;
+    font-size: .82em;
+  }
+  .nav-crumb span { color: #9ca3af; }
+
 </style>
 </head>
 <body>
-
+<nav class="nav">
+  <a href="../index.html" class="nav-home"><span class="arrow">←</span> Portafolio</a>
+  <span class="nav-crumb"><span>Actividad 1.1</span></span>
+</nav>
+<div class="page-content">
 <h1>Actividad 1.1 — Exploración Inicial de Datos</h1>
 <div class="meta">
   <strong>Autor:</strong> José Ricardo Jáuregui Guevara &nbsp;|&nbsp;
@@ -160,6 +223,6 @@
 <div class="honor">
   <strong>Código de Honor:</strong> He realizado esta actividad con integridad académica.
 </div>
-
+</div>
 </body>
 </html>
