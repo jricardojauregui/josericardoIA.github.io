@@ -6,7 +6,7 @@
 <title>Portafolio — José Ricardo Jáuregui Guevara | 608995</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  
+
   body {
     font-family: 'Segoe UI', system-ui, sans-serif;
     background: #0f1117;
@@ -14,227 +14,150 @@
     min-height: 100vh;
   }
 
-  /* ── HERO ── */
+  /* ── HERO ─────────────────────────────────────────────────── */
   .hero {
-    background: linear-gradient(135deg, #1a3a5c 0%, #2a5f8f 50%, #1e4976 100%);
-    padding: 70px 24px 60px;
+    background: linear-gradient(135deg, #111827 0%, #1e3a5f 55%, #111827 100%);
+    padding: 72px 24px 64px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid #1f2937;
   }
   .hero::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 70% 30%, rgba(100,180,255,0.12) 0%, transparent 60%);
+    background: radial-gradient(ellipse at 65% 40%, rgba(59,130,246,0.12) 0%, transparent 65%);
+    pointer-events: none;
   }
   .hero-tag {
     display: inline-block;
-    background: rgba(255,255,255,0.15);
-    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(59,130,246,0.12);
+    border: 1px solid rgba(59,130,246,0.3);
     border-radius: 20px;
-    padding: 5px 16px;
-    font-size: .8em;
-    letter-spacing: .08em;
+    padding: 5px 18px;
+    font-size: .78em;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    margin-bottom: 20px;
-    color: #93c5fd;
+    margin-bottom: 22px;
+    color: #60a5fa;
   }
   .hero h1 {
-    font-size: clamp(1.8em, 5vw, 2.8em);
+    font-size: clamp(1.7em, 5vw, 2.6em);
     font-weight: 700;
-    color: #fff;
+    color: #f1f5f9;
     margin-bottom: 10px;
     position: relative;
   }
-  .hero .subtitle {
-    font-size: 1.05em;
-    color: #bfdbfe;
-    margin-bottom: 6px;
-  }
-  .hero .meta {
-    font-size: .88em;
-    color: #93c5fd;
-    opacity: .85;
-  }
+  .hero .subtitle { font-size: 1.05em; color: #93c5fd; margin-bottom: 6px; }
+  .hero .meta     { font-size: .85em;  color: #4b6a8a; }
 
-  /* ── STATS BAR ── */
+  /* ── STATS BAR ────────────────────────────────────────────── */
   .stats {
-    background: #1e2433;
-    border-bottom: 1px solid #2d3748;
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
     display: flex;
     justify-content: center;
-    gap: 0;
     flex-wrap: wrap;
   }
   .stat {
-    padding: 18px 40px;
+    padding: 16px 44px;
     text-align: center;
-    border-right: 1px solid #2d3748;
+    border-right: 1px solid #1f2937;
   }
   .stat:last-child { border-right: none; }
-  .stat .n { font-size: 1.8em; font-weight: 700; color: #60a5fa; }
-  .stat .l { font-size: .78em; color: #94a3b8; text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+  .stat .n { font-size: 1.7em; font-weight: 700; color: #60a5fa; }
+  .stat .l { font-size: .75em; color: #64748b; text-transform: uppercase; letter-spacing: .06em; margin-top: 3px; }
 
-  /* ── MAIN ── */
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 50px 24px 80px;
-  }
+  /* ── MAIN ─────────────────────────────────────────────────── */
+  main { max-width: 1080px; margin: 0 auto; padding: 56px 24px 90px; }
 
   .section-title {
-    font-size: 1.35em;
+    font-size: 1.1em;
     font-weight: 700;
-    color: #e2e8f0;
-    margin-bottom: 28px;
+    color: #94a3b8;
+    margin-bottom: 24px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #2d3748;
+    border-bottom: 1px solid #1f2937;
+    text-transform: uppercase;
+    letter-spacing: .08em;
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .section-title .icon { font-size: 1.1em; }
 
-  /* ── CARDS GRID ── */
+  /* ── CARDS ────────────────────────────────────────────────── */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 22px;
-    margin-bottom: 56px;
+    gap: 20px;
+    margin-bottom: 60px;
   }
+  .grid.single { grid-template-columns: 1fr; }
 
   .card {
-    background: #1a2035;
-    border: 1px solid #2d3748;
+    background: #111827;
+    border: 1px solid #1f2937;
     border-radius: 14px;
-    padding: 28px 26px;
-    transition: transform .2s, border-color .2s, box-shadow .2s;
-    position: relative;
-    overflow: hidden;
+    padding: 28px 26px 24px;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
   }
-  .card::before {
+  .card::after {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
+    height: 2px;
   }
-  .card.activity::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
-  .card.project::before  { background: linear-gradient(90deg, #10b981, #34d399); }
+  .card.act::after     { background: linear-gradient(90deg, #2563eb, #60a5fa); }
+  .card.project::after { background: linear-gradient(90deg, #059669, #34d399); }
 
-  .card:hover {
-    transform: translateY(-4px);
-    border-color: #3b82f6;
-    box-shadow: 0 12px 40px rgba(59,130,246,0.15);
-  }
-  .card.project:hover { border-color: #10b981; box-shadow: 0 12px 40px rgba(16,185,129,0.15); }
+  .card:hover { transform: translateY(-4px); border-color: #2563eb; box-shadow: 0 16px 48px rgba(37,99,235,0.12); }
+  .card.project:hover { border-color: #059669; box-shadow: 0 16px 48px rgba(5,150,105,0.12); }
 
-  .card-type {
-    font-size: .72em;
-    text-transform: uppercase;
-    letter-spacing: .1em;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-  .card.activity .card-type { color: #60a5fa; }
-  .card.project  .card-type { color: #34d399; }
+  .card-type { font-size: .72em; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; margin-bottom: 10px; }
+  .card.act     .card-type { color: #3b82f6; }
+  .card.project .card-type { color: #10b981; }
 
-  .card h3 {
-    font-size: 1.08em;
-    font-weight: 700;
-    color: #f1f5f9;
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-  .card .desc {
-    font-size: .88em;
-    color: #94a3b8;
-    line-height: 1.65;
-    margin-bottom: 18px;
-    flex: 1;
-  }
+  .card h3 { font-size: 1.05em; font-weight: 700; color: #f1f5f9; line-height: 1.45; margin-bottom: 10px; }
+  .card .desc { font-size: .875em; color: #64748b; line-height: 1.7; margin-bottom: 18px; flex: 1; }
 
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 20px;
-  }
-  .tag {
-    background: #0f1827;
-    border: 1px solid #334155;
-    border-radius: 6px;
-    padding: 3px 10px;
-    font-size: .75em;
-    color: #94a3b8;
-  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tag { background: #0f1827; border: 1px solid #1e2d3d; border-radius: 6px; padding: 3px 9px; font-size: .72em; color: #475569; }
 
-  .card-links {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+  .card-links { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 16px;
-    border-radius: 8px;
-    font-size: .82em;
-    font-weight: 600;
-    text-decoration: none;
-    transition: opacity .2s, transform .15s;
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 7px 14px; border-radius: 8px; font-size: .8em; font-weight: 600;
+    text-decoration: none; transition: opacity .2s, transform .15s; white-space: nowrap;
   }
-  .btn:hover { opacity: .88; transform: translateY(-1px); }
-  .btn-primary   { background: #2563eb; color: #fff; }
-  .btn-secondary { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
-  .btn-green     { background: #059669; color: #fff; }
+  .btn:hover { opacity: .85; transform: translateY(-1px); }
+  .btn-blue  { background: #1d4ed8; color: #eff6ff; }
+  .btn-green { background: #065f46; color: #d1fae5; }
+  .btn-dim   { background: #1e2433; color: #64748b; border: 1px solid #2d3748; }
 
-  .card .r2-badge {
-    position: absolute;
-    top: 18px; right: 18px;
-    background: #10b981;
-    color: #fff;
-    border-radius: 8px;
-    padding: 4px 10px;
-    font-size: .75em;
-    font-weight: 700;
+  .r2 {
+    position: absolute; top: 18px; right: 18px;
+    background: #065f46; color: #6ee7b7; border-radius: 8px;
+    padding: 3px 10px; font-size: .72em; font-weight: 700; border: 1px solid #10b981;
   }
 
-  /* ── TECH STACK ── */
-  .tech-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 56px;
-  }
+  /* ── TECH ─────────────────────────────────────────────────── */
+  .tech-flex { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 60px; }
   .tech-pill {
-    background: #1e2433;
-    border: 1px solid #2d3748;
-    border-radius: 10px;
-    padding: 10px 18px;
-    font-size: .88em;
-    color: #cbd5e1;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    background: #111827; border: 1px solid #1f2937; border-radius: 8px;
+    padding: 8px 16px; font-size: .83em; color: #64748b;
+    display: flex; align-items: center; gap: 7px;
   }
-  .tech-pill .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #3b82f6;
-  }
-  .tech-pill .dot.green { background: #10b981; }
-  .tech-pill .dot.yellow { background: #f59e0b; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #2563eb; flex-shrink: 0; }
+  .dot.g { background: #10b981; }
+  .dot.y { background: #f59e0b; }
 
-  footer {
-    text-align: center;
-    padding: 30px 24px;
-    border-top: 1px solid #1e2433;
-    color: #475569;
-    font-size: .85em;
-  }
+  code { background: #1e2433; color: #6ee7b7; padding: 1px 6px; border-radius: 4px; font-size: .88em; }
+
+  footer { text-align: center; padding: 28px; border-top: 1px solid #1a2035; color: #334155; font-size: .82em; }
 </style>
 </head>
 <body>
@@ -256,114 +179,105 @@
 <main>
 
   <!-- ACTIVIDADES -->
-  <div class="section-title"><span class="icon">📋</span> Actividades</div>
+  <div class="section-title">📋 Actividades</div>
   <div class="grid">
 
-    <div class="card activity">
+    <div class="card act">
       <div class="card-type">Actividad 1.1</div>
       <h3>Exploración Inicial de Datos — Obesidad</h3>
-      <p class="desc">Análisis exploratorio del dataset de sobrepeso y obesidad (2,111 personas, 10 variables). Clasificación de variables, detección de nulos, distribución de la variable dependiente, cálculo de BMI y análisis gráfico en subpoblación masculina.</p>
+      <p class="desc">EDA sobre 2,111 personas y 10 variables. Distribución de niveles de obesidad, cálculo de BMI como variable derivada y análisis gráfico en subpoblación masculina.</p>
       <div class="tags">
-        <span class="tag">EDA</span>
-        <span class="tag">Visualización</span>
-        <span class="tag">BMI derivado</span>
-        <span class="tag">Pandas</span>
+        <span class="tag">EDA</span><span class="tag">Visualización</span>
+        <span class="tag">BMI derivado</span><span class="tag">Pandas</span>
       </div>
       <div class="card-links">
-        <a href="Actividad1_1/Actividad1_1.html" class="btn btn-primary">🌐 Ver Reporte</a>
-        <a href="Actividad1_1/Actividad1_1.ipynb" class="btn btn-secondary">📓 Notebook</a>
-        <a href="Actividad1_1/README.md" class="btn btn-secondary">📄 README</a>
+        <a href="tarea1/Actividad1_1.html"  class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea1/Actividad1_1.ipynb" class="btn btn-dim">📓 Notebook</a>
+        <a href="tarea1/README.md"          class="btn btn-dim">📄 README</a>
       </div>
     </div>
 
-    <div class="card activity">
+    <div class="card act">
       <div class="card-type">Actividad 1.2</div>
       <h3>Regresión Lineal — Felicidad y GDP</h3>
-      <p class="desc">Modelos de regresión lineal simple y múltiple para predecir el nivel de felicidad de 141 países. El modelo simple (GDP) obtiene R²≈0.03; el múltiple con variables del World Happiness Report alcanza R²≈0.69.</p>
+      <p class="desc">Regresión simple (R²≈0.03) y múltiple (R²≈0.69) para predecir felicidad en 141 países, incorporando variables del World Happiness Report.</p>
       <div class="tags">
-        <span class="tag">Regresión Simple</span>
-        <span class="tag">Regresión Múltiple</span>
-        <span class="tag">R²</span>
-        <span class="tag">Scikit-learn</span>
+        <span class="tag">Regresión Simple</span><span class="tag">Regresión Múltiple</span>
+        <span class="tag">R²</span><span class="tag">Scikit-learn</span>
       </div>
       <div class="card-links">
-        <a href="Actividad1_2/Actividad1_2.html" class="btn btn-primary">🌐 Ver Reporte</a>
-        <a href="Actividad1_2/Actividad1_2.ipynb" class="btn btn-secondary">📓 Notebook</a>
-        <a href="Actividad1_2/README.md" class="btn btn-secondary">📄 README</a>
+        <a href="tarea2/Actividad1_2.html"  class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea2/A_1_2.ipynb"        class="btn btn-dim">📓 Notebook</a>
+        <a href="tarea2/README.md"          class="btn btn-dim">📄 README</a>
       </div>
     </div>
 
-    <div class="card activity">
+    <div class="card act">
       <div class="card-type">Actividad 1.3</div>
       <h3>Regresión Lineal Múltiple — Calificaciones</h3>
-      <p class="desc">Predicción de la calificación final (G3) de 395 estudiantes. Incluye Label Encoding, selección de variables por significancia estadística (OLS), evaluación con R², RMSE y MAPE, e interpretación de coeficientes.</p>
+      <p class="desc">Predicción de la calificación final G3 de 395 estudiantes. Label Encoding, selección por p-valor OLS, R²=0.83 en entrenamiento y RMSE=2.36.</p>
       <div class="tags">
-        <span class="tag">Label Encoding</span>
-        <span class="tag">OLS</span>
-        <span class="tag">RMSE</span>
-        <span class="tag">Statsmodels</span>
+        <span class="tag">Label Encoding</span><span class="tag">OLS</span>
+        <span class="tag">RMSE</span><span class="tag">Statsmodels</span>
       </div>
       <div class="card-links">
-        <a href="Actividad1_3/Actividad1_3.html" class="btn btn-primary">🌐 Ver Reporte</a>
-        <a href="Actividad1_3/Actividad1_3.ipynb" class="btn btn-secondary">📓 Notebook</a>
-        <a href="Actividad1_3/README.md" class="btn btn-secondary">📄 README</a>
+        <a href="tarea3/Actividad1_3.html"               class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea3/Actividad3_Calificaciones.ipynb" class="btn btn-dim">📓 Notebook</a>
+        <a href="tarea3/README.md"                       class="btn btn-dim">📄 README</a>
       </div>
     </div>
 
   </div>
 
   <!-- PROYECTO -->
-  <div class="section-title"><span class="icon">🏠</span> Proyecto Parcial 1</div>
-  <div class="grid">
+  <div class="section-title">🏠 Proyecto Parcial 1</div>
+  <div class="grid single">
 
-    <div class="card project" style="grid-column: 1 / -1; max-width: 100%;">
-      <div class="r2-badge">R² = 0.47</div>
+    <div class="card project">
+      <div class="r2">R² = 0.47</div>
       <div class="card-type">Proyecto Final · Parcial 1</div>
       <h3>Determinantes del Ingreso en Hogares Mexicanos (ENIGH 2014)</h3>
       <p class="desc">
-        Análisis completo de los determinantes socioeconómicos del ingreso corriente total (<code>ing_cor</code>) de <strong>58,125 hogares mexicanos</strong> usando la ENIGH 2014 del INEGI. El flujo incluye exploración, limpieza, transformación logarítmica, selección de variables con tres métodos (backward, forward, stepwise), construcción y comparación de tres modelos (Regresión Lineal, Random Forest base, Random Forest optimizado con RandomizedSearchCV), inferencia estadística con OLS HC3 y análisis de escenarios what-if.
+        Análisis completo de los factores socioeconómicos del ingreso corriente total (<code>ing_cor</code>) de <strong style="color:#cbd5e1">58,125 hogares mexicanos</strong> usando la ENIGH 2014 del INEGI. Incluye exploración, limpieza, transformación logarítmica, selección de variables con tres métodos (backward, forward, stepwise), tres modelos comparados (Regresión Lineal, Random Forest base, Random Forest optimizado con RandomizedSearchCV), inferencia OLS HC3 y análisis what-if.
         <br><br>
-        <strong>Modelo ganador:</strong> Random Forest Optimizado (R²=0.47, RMSE=0.65, brecha=7.1%). Variables clave: educación del jefe, estrato socioeconómico, ocupados del hogar, tamaño de localidad y sexo del jefe.
+        <strong style="color:#cbd5e1">Modelo ganador:</strong> Random Forest Optimizado — R²=0.47, RMSE=0.65, brecha=7.1%. Variables clave: <em>educa_jefe</em>, <em>est_socio</em>, <em>ocupados</em>.
       </p>
       <div class="tags">
-        <span class="tag">ENIGH 2014</span>
-        <span class="tag">Backward/Forward/Stepwise</span>
-        <span class="tag">Random Forest</span>
-        <span class="tag">RandomizedSearchCV</span>
-        <span class="tag">OLS HC3</span>
+        <span class="tag">ENIGH 2014</span><span class="tag">58,125 hogares</span>
+        <span class="tag">Backward / Forward / Stepwise</span><span class="tag">Random Forest</span>
+        <span class="tag">RandomizedSearchCV</span><span class="tag">OLS HC3</span>
         <span class="tag">What-If Analysis</span>
-        <span class="tag">58,125 hogares</span>
       </div>
       <div class="card-links">
-        <a href="Proyecto1/Proyecto1.html" class="btn btn-green">🌐 Ver Reporte</a>
-        <a href="Proyecto1/Proyecto1.ipynb" class="btn btn-secondary">📓 Notebook</a>
-        <a href="Proyecto1/README.md" class="btn btn-secondary">📄 README</a>
-        <a href="https://www.inegi.org.mx/programas/enigh/nc/2014/" target="_blank" class="btn btn-secondary">🔗 Dataset (INEGI)</a>
+        <a href="proyectoParcial1/Proyecto1.html"     class="btn btn-green">🌐 Reporte</a>
+        <a href="proyectoParcial1/P1_1_608995.ipynb" class="btn btn-dim">📓 Notebook</a>
+        <a href="proyectoParcial1/README.md"          class="btn btn-dim">📄 README</a>
+        <a href="https://www.inegi.org.mx/programas/enigh/nc/2014/" target="_blank" class="btn btn-dim">🔗 Dataset INEGI</a>
       </div>
     </div>
 
   </div>
 
   <!-- TECH STACK -->
-  <div class="section-title"><span class="icon">🛠️</span> Tecnologías Utilizadas</div>
-  <div class="tech-grid">
-    <div class="tech-pill"><span class="dot"></span> Python 3</div>
-    <div class="tech-pill"><span class="dot"></span> Pandas</div>
-    <div class="tech-pill"><span class="dot"></span> NumPy</div>
-    <div class="tech-pill"><span class="dot yellow"></span> Matplotlib</div>
-    <div class="tech-pill"><span class="dot yellow"></span> Seaborn</div>
-    <div class="tech-pill"><span class="dot green"></span> Scikit-learn</div>
-    <div class="tech-pill"><span class="dot green"></span> Statsmodels</div>
-    <div class="tech-pill"><span class="dot green"></span> Random Forest</div>
-    <div class="tech-pill"><span class="dot"></span> Jupyter Notebook</div>
-    <div class="tech-pill"><span class="dot"></span> GitHub Pages</div>
+  <div class="section-title">🛠️ Tecnologías</div>
+  <div class="tech-flex">
+    <div class="tech-pill"><span class="dot"></span>Python 3</div>
+    <div class="tech-pill"><span class="dot"></span>Pandas</div>
+    <div class="tech-pill"><span class="dot"></span>NumPy</div>
+    <div class="tech-pill"><span class="dot y"></span>Matplotlib</div>
+    <div class="tech-pill"><span class="dot y"></span>Seaborn</div>
+    <div class="tech-pill"><span class="dot g"></span>Scikit-learn</div>
+    <div class="tech-pill"><span class="dot g"></span>Statsmodels</div>
+    <div class="tech-pill"><span class="dot g"></span>Random Forest</div>
+    <div class="tech-pill"><span class="dot"></span>Jupyter Notebook</div>
+    <div class="tech-pill"><span class="dot"></span>GitHub Pages</div>
   </div>
 
 </main>
 
 <footer>
-  José Ricardo Jáuregui Guevara · 608995 · Universidad de Monterrey · 2026 &nbsp;|&nbsp;
-  Todos los análisis realizados con integridad académica.
+  José Ricardo Jáuregui Guevara · 608995 · Universidad de Monterrey · 2026
+  &nbsp;·&nbsp; Todos los análisis realizados con integridad académica.
 </footer>
 
 </body>
