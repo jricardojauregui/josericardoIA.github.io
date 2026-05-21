@@ -5,181 +5,489 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portafolio — José Ricardo Jáuregui Guevara | 608995</title>
 <style>
+  :root {
+    --bg:        #f4f6fb;
+    --surface:   #ffffff;
+    --border:    #e4e9f2;
+    --text:      #0f172a;
+    --muted:     #64748b;
+    --blue:      #3b82f6;
+    --blue-dark: #1d4ed8;
+    --green:     #10b981;
+    --green-dark:#059669;
+    --purple:    #8b5cf6;
+    --orange:    #f59e0b;
+    --shadow-sm: 0 1px 4px rgba(15,23,42,.06), 0 4px 16px rgba(15,23,42,.06);
+    --shadow-md: 0 8px 32px rgba(15,23,42,.10), 0 2px 8px rgba(15,23,42,.06);
+    --shadow-lg: 0 20px 60px rgba(15,23,42,.14), 0 4px 16px rgba(15,23,42,.08);
+    --r: 16px;
+    --transition: .25s cubic-bezier(.4,0,.2,1);
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { scroll-behavior: smooth; }
+
   body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    background: #0f1117;
-    color: #e2e8f0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND MESH ─────────────────────────────────────── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: -1;
+    background:
+      radial-gradient(ellipse 80vw 60vh at 20% 10%, rgba(59,130,246,.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60vw 50vh at 80% 80%, rgba(16,185,129,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 40vw 40vh at 60% 30%, rgba(139,92,246,.05) 0%, transparent 70%);
+    animation: meshShift 12s ease-in-out infinite alternate;
+  }
+  @keyframes meshShift {
+    0%   { opacity: 1; }
+    100% { opacity: .6; }
   }
 
   /* ── HERO ─────────────────────────────────────────────────── */
   .hero {
-    background: linear-gradient(135deg, #111827 0%, #1e3a5f 55%, #111827 100%);
-    padding: 72px 24px 64px;
+    padding: 100px 24px 80px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid #1f2937;
   }
-  .hero::before {
+
+  /* Animated dots grid */
+  .hero::after {
     content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 65% 40%, rgba(59,130,246,0.12) 0%, transparent 65%);
+    position: absolute; inset: 0; z-index: 0;
+    background-image: radial-gradient(circle, rgba(59,130,246,.15) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    animation: gridPulse 4s ease-in-out infinite alternate;
     pointer-events: none;
   }
-  .hero-tag {
-    display: inline-block;
-    background: rgba(59,130,246,0.12);
-    border: 1px solid rgba(59,130,246,0.3);
-    border-radius: 20px;
-    padding: 5px 18px;
-    font-size: .78em;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    margin-bottom: 22px;
-    color: #60a5fa;
+  @keyframes gridPulse {
+    0%   { opacity: .4; transform: scale(1); }
+    100% { opacity: .8; transform: scale(1.03); }
   }
-  .hero h1 {
-    font-size: clamp(1.7em, 5vw, 2.6em);
-    font-weight: 700;
-    color: #f1f5f9;
-    margin-bottom: 10px;
-    position: relative;
-  }
-  .hero .subtitle { font-size: 1.05em; color: #93c5fd; margin-bottom: 6px; }
-  .hero .meta     { font-size: .85em;  color: #4b6a8a; }
 
-  /* ── STATS BAR ────────────────────────────────────────────── */
-  .stats {
-    background: #111827;
-    border-bottom: 1px solid #1f2937;
+  .hero > * { position: relative; z-index: 1; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(59,130,246,.1);
+    border: 1px solid rgba(59,130,246,.25);
+    border-radius: 99px;
+    padding: 6px 20px;
+    font-size: .75em;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 28px;
+    animation: fadeDown .6s ease both;
+  }
+  .hero-badge .pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--blue);
+    animation: pulseRing 1.5s ease-in-out infinite;
+  }
+  @keyframes pulseRing {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,.6); }
+    50%       { box-shadow: 0 0 0 5px rgba(59,130,246,0); }
+  }
+
+  .hero h1 {
+    font-size: clamp(2em, 6vw, 3.4em);
+    font-weight: 800;
+    letter-spacing: -.03em;
+    line-height: 1.1;
+    margin-bottom: 14px;
+    animation: fadeDown .6s .1s ease both;
+    background: linear-gradient(135deg, #0f172a 0%, #334155 60%, #3b82f6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .subtitle {
+    font-size: 1.1em;
+    color: var(--blue);
+    font-weight: 600;
+    margin-bottom: 10px;
+    animation: fadeDown .6s .2s ease both;
+  }
+
+  .hero .meta {
+    font-size: .88em;
+    color: var(--muted);
+    animation: fadeDown .6s .3s ease both;
+  }
+
+  /* ── STATS ────────────────────────────────────────────────── */
+  .stats-wrap {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 16px;
+    padding: 0 24px 56px;
+    animation: fadeDown .6s .4s ease both;
   }
-  .stat {
-    padding: 16px 44px;
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 22px 36px;
     text-align: center;
-    border-right: 1px solid #1f2937;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+    min-width: 130px;
   }
-  .stat:last-child { border-right: none; }
-  .stat .n { font-size: 1.7em; font-weight: 700; color: #60a5fa; }
-  .stat .l { font-size: .75em; color: #64748b; text-transform: uppercase; letter-spacing: .06em; margin-top: 3px; }
-
-  /* ── MAIN ─────────────────────────────────────────────────── */
-  main { max-width: 1080px; margin: 0 auto; padding: 56px 24px 90px; }
-
-  .section-title {
-    font-size: 1.1em;
-    font-weight: 700;
-    color: #94a3b8;
-    margin-bottom: 24px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #1f2937;
+  .stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .stat-card .n {
+    font-size: 2em;
+    font-weight: 800;
+    letter-spacing: -.03em;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat-card .l {
+    font-size: .72em;
+    color: var(--muted);
     text-transform: uppercase;
     letter-spacing: .08em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    margin-top: 4px;
+    font-weight: 600;
   }
 
-  /* ── CARDS ────────────────────────────────────────────────── */
+  /* ── MAIN ─────────────────────────────────────────────────── */
+  main { max-width: 1100px; margin: 0 auto; padding: 0 24px 100px; }
+
+  /* ── SECTION TITLE ────────────────────────────────────────── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 28px;
+    margin-top: 20px;
+  }
+  .section-header .line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .78em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .section-label .dot-label {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+  }
+
+  /* ── GRID ─────────────────────────────────────────────────── */
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 22px;
+    margin-bottom: 56px;
   }
   .grid.single { grid-template-columns: 1fr; }
 
+  /* ── CARDS ────────────────────────────────────────────────── */
   .card {
-    background: #111827;
-    border: 1px solid #1f2937;
-    border-radius: 14px;
-    padding: 28px 26px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: 28px;
     display: flex;
     flex-direction: column;
     position: relative;
     overflow: hidden;
-    transition: transform .2s, border-color .2s, box-shadow .2s;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    /* for scroll animation */
+    opacity: 0;
+    transform: translateY(30px);
   }
-  .card::after {
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity .5s ease, transform .5s ease,
+                box-shadow var(--transition), border-color var(--transition);
+  }
+
+  /* Gradient top bar */
+  .card::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 2px;
+    height: 3px;
+    border-radius: var(--r) var(--r) 0 0;
+    transition: height var(--transition);
   }
-  .card.act::after     { background: linear-gradient(90deg, #2563eb, #60a5fa); }
-  .card.project::after { background: linear-gradient(90deg, #059669, #34d399); }
+  .card.act::before     { background: linear-gradient(90deg, var(--blue), var(--purple)); }
+  .card.project::before { background: linear-gradient(90deg, var(--green), #34d399); }
 
-  .card:hover { transform: translateY(-4px); border-color: #2563eb; box-shadow: 0 16px 48px rgba(37,99,235,0.12); }
-  .card.project:hover { border-color: #059669; box-shadow: 0 16px 48px rgba(5,150,105,0.12); }
+  /* Glow shimmer on hover */
+  .card::after {
+    content: '';
+    position: absolute; inset: 0;
+    border-radius: var(--r);
+    opacity: 0;
+    transition: opacity var(--transition);
+    pointer-events: none;
+  }
+  .card.act::after     { background: radial-gradient(ellipse at top, rgba(59,130,246,.06), transparent 70%); }
+  .card.project::after { background: radial-gradient(ellipse at top, rgba(16,185,129,.06), transparent 70%); }
 
-  .card-type { font-size: .72em; text-transform: uppercase; letter-spacing: .1em; font-weight: 700; margin-bottom: 10px; }
-  .card.act     .card-type { color: #3b82f6; }
-  .card.project .card-type { color: #10b981; }
+  .card:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: var(--shadow-lg);
+  }
+  .card.act:hover     { border-color: rgba(59,130,246,.4); }
+  .card.project:hover { border-color: rgba(16,185,129,.4); }
+  .card:hover::after  { opacity: 1; }
+  .card:hover::before { height: 4px; }
 
-  .card h3 { font-size: 1.05em; font-weight: 700; color: #f1f5f9; line-height: 1.45; margin-bottom: 10px; }
-  .card .desc { font-size: .875em; color: #64748b; line-height: 1.7; margin-bottom: 18px; flex: 1; }
+  .card-type {
+    font-size: .7em;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .card.act     .card-type { color: var(--blue); }
+  .card.project .card-type { color: var(--green-dark); }
 
+  .card h3 {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .card .desc {
+    font-size: .875em;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 18px;
+    flex: 1;
+  }
+
+  .card .desc strong { color: var(--text); }
+  .card .desc em     { color: #475569; }
+  .card .desc code   {
+    background: #f1f5f9;
+    color: var(--blue-dark);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: .88em;
+  }
+
+  /* ── TAGS ─────────────────────────────────────────────────── */
   .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
-  .tag { background: #0f1827; border: 1px solid #1e2d3d; border-radius: 6px; padding: 3px 9px; font-size: .72em; color: #475569; }
+  .tag {
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 3px 10px;
+    font-size: .7em;
+    color: #475569;
+    font-weight: 500;
+    transition: background var(--transition), color var(--transition);
+  }
+  .card:hover .tag { background: #e8f0fe; color: var(--blue-dark); border-color: rgba(59,130,246,.2); }
+  .card.project:hover .tag { background: #ecfdf5; color: var(--green-dark); border-color: rgba(16,185,129,.2); }
 
+  /* ── BADGE (R²) ───────────────────────────────────────────── */
+  .badge-metric {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    color: var(--green-dark);
+    border: 1px solid #6ee7b7;
+    border-radius: 8px;
+    padding: 4px 11px;
+    font-size: .72em;
+    font-weight: 700;
+  }
+
+  /* ── BUTTONS ──────────────────────────────────────────────── */
   .card-links { display: flex; gap: 8px; flex-wrap: wrap; }
   .btn {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 7px 14px; border-radius: 8px; font-size: .8em; font-weight: 600;
-    text-decoration: none; transition: opacity .2s, transform .15s; white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    border-radius: 9px;
+    font-size: .78em;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+    position: relative;
+    overflow: hidden;
   }
-  .btn:hover { opacity: .85; transform: translateY(-1px); }
-  .btn-blue  { background: #1d4ed8; color: #eff6ff; }
-  .btn-green { background: #065f46; color: #d1fae5; }
-  .btn-dim   { background: #1e2433; color: #64748b; border: 1px solid #2d3748; }
-
-  .r2 {
-    position: absolute; top: 18px; right: 18px;
-    background: #065f46; color: #6ee7b7; border-radius: 8px;
-    padding: 3px 10px; font-size: .72em; font-weight: 700; border: 1px solid #10b981;
+  .btn::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,.15);
+    opacity: 0;
+    transition: opacity .2s;
   }
+  .btn:hover { transform: translateY(-2px); opacity: .92; }
+  .btn:hover::after { opacity: 1; }
+  .btn:active { transform: translateY(0); }
 
-  /* ── TECH ─────────────────────────────────────────────────── */
-  .tech-flex { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 60px; }
+  .btn-blue {
+    background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(59,130,246,.3);
+  }
+  .btn-blue:hover  { box-shadow: 0 4px 20px rgba(59,130,246,.45); }
+
+  .btn-green {
+    background: linear-gradient(135deg, var(--green), var(--green-dark));
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(16,185,129,.3);
+  }
+  .btn-green:hover { box-shadow: 0 4px 20px rgba(16,185,129,.45); }
+
+  .btn-dim {
+    background: #f1f5f9;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .btn-dim:hover { background: #e8f0fe; color: var(--blue); border-color: rgba(59,130,246,.3); }
+
+  /* ── TECH PILLS ───────────────────────────────────────────── */
+  .tech-flex {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 60px;
+  }
   .tech-pill {
-    background: #111827; border: 1px solid #1f2937; border-radius: 8px;
-    padding: 8px 16px; font-size: .83em; color: #64748b;
-    display: flex; align-items: center; gap: 7px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 8px 18px;
+    font-size: .82em;
+    color: var(--muted);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition),
+                color var(--transition), border-color var(--transition);
   }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: #2563eb; flex-shrink: 0; }
-  .dot.g { background: #10b981; }
-  .dot.y { background: #f59e0b; }
+  .tech-pill:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: var(--shadow-md);
+    color: var(--text);
+    border-color: rgba(59,130,246,.3);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot      { background: linear-gradient(135deg, var(--blue), var(--purple)); }
+  .dot.g    { background: linear-gradient(135deg, var(--green), #34d399); }
+  .dot.y    { background: linear-gradient(135deg, var(--orange), #fbbf24); }
 
-  code { background: #1e2433; color: #6ee7b7; padding: 1px 6px; border-radius: 4px; font-size: .88em; }
+  /* ── FOOTER ───────────────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 36px 24px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: .83em;
+  }
 
-  footer { text-align: center; padding: 28px; border-top: 1px solid #1a2035; color: #334155; font-size: .82em; }
+  /* ── SCROLL ANIMATIONS ────────────────────────────────────── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity .55s ease, transform .55s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* stagger delay for cards */
+  .card:nth-child(1) { transition-delay: .05s; }
+  .card:nth-child(2) { transition-delay: .12s; }
+  .card:nth-child(3) { transition-delay: .19s; }
+
 </style>
 </head>
 <body>
 
+<!-- ── HERO ──────────────────────────────────────────────────── -->
 <div class="hero">
-  <div class="hero-tag">📊 Portafolio Académico · Parciales 1, 2 y 3</div>
+  <div class="hero-badge">
+    <span class="pulse"></span>
+    Portafolio Académico · Parciales 1, 2 y 3
+  </div>
   <h1>José Ricardo Jáuregui Guevara</h1>
   <p class="subtitle">Estadística y Ciencia de Datos</p>
   <p class="meta">Matrícula: 608995 &nbsp;·&nbsp; Universidad de Monterrey &nbsp;·&nbsp; Escuela de Ingeniería y Tecnologías &nbsp;·&nbsp; 2026</p>
 </div>
 
-<div class="stats">
-  <div class="stat"><div class="n">12</div><div class="l">Entregas</div></div>
-  <div class="stat"><div class="n">9</div><div class="l">Actividades</div></div>
-  <div class="stat"><div class="n">3</div><div class="l">Proyectos</div></div>
-  <div class="stat"><div class="n">58K+</div><div class="l">Filas analizadas</div></div>
+<!-- ── STATS ─────────────────────────────────────────────────── -->
+<div class="stats-wrap">
+  <div class="stat-card">
+    <div class="n" data-target="12">0</div>
+    <div class="l">Entregas</div>
+  </div>
+  <div class="stat-card">
+    <div class="n" data-target="9">0</div>
+    <div class="l">Actividades</div>
+  </div>
+  <div class="stat-card">
+    <div class="n" data-target="3">0</div>
+    <div class="l">Proyectos</div>
+  </div>
+  <div class="stat-card">
+    <div class="n">58K+</div>
+    <div class="l">Filas analizadas</div>
+  </div>
 </div>
 
 <main>
 
-  <!-- ACTIVIDADES PARCIAL 1 -->
-  <div class="section-title">📋 Actividades — Parcial 1</div>
+  <!-- ── ACTIVIDADES PARCIAL 1 ─────────────────────────────── -->
+  <div class="section-header reveal">
+    <span class="section-label"><span class="dot-label"></span>📋 Actividades — Parcial 1</span>
+    <span class="line"></span>
+  </div>
   <div class="grid">
 
     <div class="card act">
@@ -229,21 +537,24 @@
 
   </div>
 
-  <!-- ACTIVIDADES PARCIAL 2 -->
-  <div class="section-title">📋 Actividades — Parcial 2</div>
+  <!-- ── ACTIVIDADES PARCIAL 2 ─────────────────────────────── -->
+  <div class="section-header reveal">
+    <span class="section-label"><span class="dot-label"></span>📋 Actividades — Parcial 2</span>
+    <span class="line"></span>
+  </div>
   <div class="grid">
 
     <div class="card act">
       <div class="card-type">Actividad 2.1</div>
       <h3>Regresión Logística y Validación Cruzada</h3>
-      <p class="desc">Clasificación de hogares mexicanos en tres niveles de ingreso (Bajo/Medio/Alto) usando Regresión Logística con Validación Cruzada Estratificada (StratifiedKFold). Análisis de curva ROC, matriz de confusión y reporte de clasificación sobre la ENIGH 2014.</p>
+      <p class="desc">Clasificación de hogares mexicanos en tres niveles de ingreso (Bajo/Medio/Alto) usando Regresión Logística con Validación Cruzada Estratificada. Análisis de curva ROC, matriz de confusión y reporte de clasificación sobre la ENIGH 2014.</p>
       <div class="tags">
         <span class="tag">Regresión Logística</span><span class="tag">Validación Cruzada</span>
         <span class="tag">ROC-AUC</span><span class="tag">Scikit-learn</span>
       </div>
       <div class="card-links">
-        <a href="tarea4/Actividad2_1.html"               class="btn btn-blue">🌐 Reporte</a>
-        <a href="tarea4/A2_1_Regresion_Logistica.ipynb"  class="btn btn-dim">📓 Notebook</a>
+        <a href="tarea4/Actividad2_1.html"              class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea4/A2_1_Regresion_Logistica.ipynb" class="btn btn-dim">📓 Notebook</a>
       </div>
     </div>
 
@@ -264,27 +575,30 @@
     <div class="card act">
       <div class="card-type">Actividad 2.3</div>
       <h3>Ensambles, SVM y Redes Neuronales</h3>
-      <p class="desc">Evaluación de modelos avanzados de clasificación: Random Forest, Gradient Boosting, SVM y Red Neuronal MLP sobre la misma tarea de clasificación de ingreso hogar. Comparación sistemática de accuracy, F1 y tiempo de entrenamiento.</p>
+      <p class="desc">Evaluación de modelos avanzados de clasificación: Random Forest, Gradient Boosting, SVM y Red Neuronal MLP. Comparación sistemática de accuracy, F1 y tiempo de entrenamiento sobre la misma tarea.</p>
       <div class="tags">
         <span class="tag">Random Forest</span><span class="tag">Gradient Boosting</span>
         <span class="tag">SVM</span><span class="tag">MLP</span>
       </div>
       <div class="card-links">
-        <a href="tarea6/Actividad2_3.html"                      class="btn btn-blue">🌐 Reporte</a>
-        <a href="tarea6/A2_3_Ensamble_SVM_RedNeuronal.ipynb"   class="btn btn-dim">📓 Notebook</a>
+        <a href="tarea6/Actividad2_3.html"                    class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea6/A2_3_Ensamble_SVM_RedNeuronal.ipynb" class="btn btn-dim">📓 Notebook</a>
       </div>
     </div>
 
   </div>
 
-  <!-- ACTIVIDADES PARCIAL 3 -->
-  <div class="section-title">📋 Actividades — Parcial 3</div>
+  <!-- ── ACTIVIDADES PARCIAL 3 ─────────────────────────────── -->
+  <div class="section-header reveal">
+    <span class="section-label"><span class="dot-label"></span>📋 Actividades — Parcial 3</span>
+    <span class="line"></span>
+  </div>
   <div class="grid">
 
     <div class="card act">
       <div class="card-type">Actividad 3.1</div>
       <h3>PCA y Sistemas de Recomendación</h3>
-      <p class="desc">Reducción de dimensionalidad con PCA sobre el dataset de cáncer de mama (sklearn). Visualización en componentes principales, varianza explicada acumulada y exploración de sistemas de recomendación como aplicación de técnicas no supervisadas.</p>
+      <p class="desc">Reducción de dimensionalidad con PCA sobre el dataset de cáncer de mama (sklearn). Varianza explicada acumulada, proyección en componentes principales y exploración de sistemas de recomendación como aplicación no supervisada.</p>
       <div class="tags">
         <span class="tag">PCA</span><span class="tag">Reducción de dimensionalidad</span>
         <span class="tag">Breast Cancer</span><span class="tag">No supervisado</span>
@@ -298,7 +612,7 @@
     <div class="card act">
       <div class="card-type">Actividad 3.2</div>
       <h3>Clustering — K-Means y Jerárquico</h3>
-      <p class="desc">Agrupamiento no supervisado con K-Means y Clustering Jerárquico sobre datos sintéticos. Selección del número óptimo de clústeres mediante el método del codo, silueta e índice de Rand ajustado. Visualización de dendrogramas y fronteras de clúster.</p>
+      <p class="desc">Agrupamiento no supervisado con K-Means y Clustering Jerárquico sobre datos sintéticos. Selección del número óptimo de clústeres con el método del codo, silueta e índice de Rand ajustado. Visualización de dendrogramas.</p>
       <div class="tags">
         <span class="tag">K-Means</span><span class="tag">Clustering Jerárquico</span>
         <span class="tag">Silhouette</span><span class="tag">Dendrograma</span>
@@ -312,31 +626,33 @@
     <div class="card act">
       <div class="card-type">Actividad 3.3</div>
       <h3>Pruebas Múltiples y Aprendizaje por Refuerzo</h3>
-      <p class="desc">Comparación de hipótesis múltiples con el dataset NCI60, correcciones de Bonferroni y FDR (Benjamini-Hochberg). Introducción al aprendizaje por refuerzo: agente Q-Learning en entorno de cuadrícula con análisis de política óptima.</p>
+      <p class="desc">Comparación de hipótesis múltiples con el dataset NCI60, correcciones de Bonferroni y FDR (Benjamini-Hochberg). Introducción a Q-Learning con agente en entorno de cuadrícula y análisis de política óptima.</p>
       <div class="tags">
         <span class="tag">Multiple Testing</span><span class="tag">Bonferroni</span>
         <span class="tag">FDR</span><span class="tag">Q-Learning</span>
       </div>
       <div class="card-links">
-        <a href="tarea9/Actividad3_3.html"  class="btn btn-blue">🌐 Reporte</a>
-        <a href="tarea9/A3_3_608995.ipynb"  class="btn btn-dim">📓 Notebook</a>
+        <a href="tarea9/Actividad3_3.html" class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea9/A3_3_608995.ipynb" class="btn btn-dim">📓 Notebook</a>
       </div>
     </div>
 
   </div>
 
-  <!-- PROYECTO PARCIAL 1 -->
-  <div class="section-title">🏠 Proyecto Parcial 1</div>
+  <!-- ── PROYECTO PARCIAL 1 ─────────────────────────────────── -->
+  <div class="section-header reveal">
+    <span class="section-label"><span class="dot-label"></span>🏆 Proyecto — Parcial 1</span>
+    <span class="line"></span>
+  </div>
   <div class="grid single">
-
     <div class="card project">
-      <div class="r2">R² = 0.47</div>
+      <div class="badge-metric">R² = 0.47</div>
       <div class="card-type">Proyecto Final · Parcial 1</div>
       <h3>Determinantes del Ingreso en Hogares Mexicanos (ENIGH 2014)</h3>
       <p class="desc">
-        Análisis completo de los factores socioeconómicos del ingreso corriente total (<code>ing_cor</code>) de <strong style="color:#cbd5e1">58,125 hogares mexicanos</strong> usando la ENIGH 2014 del INEGI. Incluye exploración, limpieza, transformación logarítmica, selección de variables con tres métodos (backward, forward, stepwise), tres modelos comparados (Regresión Lineal, Random Forest base, Random Forest optimizado con RandomizedSearchCV), inferencia OLS HC3 y análisis what-if.
+        Análisis completo de los factores socioeconómicos del ingreso corriente total (<code>ing_cor</code>) de <strong>58,125 hogares mexicanos</strong> usando la ENIGH 2014 del INEGI. Incluye exploración, limpieza, transformación logarítmica, selección de variables con tres métodos (backward, forward, stepwise), tres modelos comparados (Regresión Lineal, Random Forest base, Random Forest optimizado con RandomizedSearchCV), inferencia OLS HC3 y análisis what-if.
         <br><br>
-        <strong style="color:#cbd5e1">Modelo ganador:</strong> Random Forest Optimizado — R²=0.47, RMSE=0.65, brecha=7.1%. Variables clave: <em>educa_jefe</em>, <em>est_socio</em>, <em>ocupados</em>.
+        <strong>Modelo ganador:</strong> Random Forest Optimizado — R²=0.47, RMSE=0.65, brecha=7.1%. Variables clave: <em>educa_jefe</em>, <em>est_socio</em>, <em>ocupados</em>.
       </p>
       <div class="tags">
         <span class="tag">ENIGH 2014</span><span class="tag">58,125 hogares</span>
@@ -351,20 +667,21 @@
         <a href="https://www.inegi.org.mx/programas/enigh/nc/2014/" target="_blank" class="btn btn-dim">🔗 Dataset INEGI</a>
       </div>
     </div>
-
   </div>
 
-  <!-- PROYECTO PARCIAL 2 -->
-  <div class="section-title">🏠 Proyecto Parcial 2</div>
+  <!-- ── PROYECTO PARCIAL 2 ─────────────────────────────────── -->
+  <div class="section-header reveal">
+    <span class="section-label"><span class="dot-label"></span>🏆 Proyecto — Parcial 2</span>
+    <span class="line"></span>
+  </div>
   <div class="grid single">
-
     <div class="card project">
       <div class="card-type">Proyecto Final · Parcial 2</div>
       <h3>Clasificación de Nivel de Ingreso en Hogares Mexicanos (ENIGH 2014)</h3>
       <p class="desc">
-        Comparación integral de modelos de clasificación supervisada para predecir el nivel de ingreso (Bajo/Medio/Alto) de <strong style="color:#cbd5e1">58,125 hogares mexicanos</strong>. Se evaluaron seis algoritmos: Regresión Logística, LDA, Árbol de Decisión, Random Forest, Gradient Boosting, SVM y Red Neuronal MLP, con validación cruzada estratificada y análisis de importancia de variables.
+        Comparación integral de modelos de clasificación supervisada para predecir el nivel de ingreso (Bajo/Medio/Alto) de <strong>58,125 hogares mexicanos</strong>. Se evaluaron seis algoritmos: Regresión Logística, LDA, Árbol de Decisión, Random Forest, Gradient Boosting, SVM y Red Neuronal MLP, con validación cruzada estratificada y análisis de importancia de variables.
         <br><br>
-        <strong style="color:#cbd5e1">Variables clave:</strong> <em>educa_jefe</em>, <em>est_socio</em>, <em>ocupados</em>. Análisis de curvas ROC multi-clase, matrices de confusión y reporte de clasificación por modelo.
+        <strong>Variables clave:</strong> <em>educa_jefe</em>, <em>est_socio</em>, <em>ocupados</em>. Análisis de curvas ROC multi-clase, matrices de confusión y reporte de clasificación por modelo.
       </p>
       <div class="tags">
         <span class="tag">ENIGH 2014</span><span class="tag">Clasificación multi-clase</span>
@@ -373,24 +690,25 @@
         <span class="tag">Gradient Boosting</span><span class="tag">MLP</span>
       </div>
       <div class="card-links">
-        <a href="proyectoParcial2/Proyecto2.html"   class="btn btn-green">🌐 Reporte</a>
-        <a href="proyectoParcial2/P2_608995.ipynb"  class="btn btn-dim">📓 Notebook</a>
+        <a href="proyectoParcial2/Proyecto2.html"  class="btn btn-green">🌐 Reporte</a>
+        <a href="proyectoParcial2/P2_608995.ipynb" class="btn btn-dim">📓 Notebook</a>
       </div>
     </div>
-
   </div>
 
-  <!-- PROYECTO PARCIAL 3 -->
-  <div class="section-title">🏠 Proyecto Parcial 3</div>
+  <!-- ── PROYECTO PARCIAL 3 ─────────────────────────────────── -->
+  <div class="section-header reveal">
+    <span class="section-label"><span class="dot-label"></span>🏆 Proyecto — Parcial 3</span>
+    <span class="line"></span>
+  </div>
   <div class="grid single">
-
     <div class="card project">
       <div class="card-type">Proyecto Final · Parcial 3</div>
       <h3>Agrupamiento de Pacientes con Cáncer Renal (TCGA-KIRC) mediante PCA y Clustering</h3>
       <p class="desc">
-        Análisis no supervisado de datos de expresión génica de <strong style="color:#cbd5e1">pacientes con Carcinoma de Células Renales Claras (KIRC)</strong> del repositorio TCGA. Se aplica PCA para reducir la alta dimensionalidad (genes × muestras), seguido de K-Means y Clustering Jerárquico para identificar subtipos moleculares con relevancia clínica.
+        Análisis no supervisado de datos de expresión génica de <strong>pacientes con Carcinoma de Células Renales Claras (KIRC)</strong> del repositorio TCGA. Se aplica PCA para reducir la alta dimensionalidad (genes × muestras), seguido de K-Means y Clustering Jerárquico para identificar subtipos moleculares con relevancia clínica.
         <br><br>
-        <strong style="color:#cbd5e1">Dataset:</strong> TCGA-KIRC (expresión génica STAR-TPM + datos clínicos + supervivencia). Evaluación con silhouette score, índice de Rand ajustado e integración con variables de supervivencia.
+        <strong>Dataset:</strong> TCGA-KIRC (expresión génica STAR-TPM + datos clínicos + supervivencia). Evaluación con silhouette score, índice de Rand ajustado e integración con variables de supervivencia.
       </p>
       <div class="tags">
         <span class="tag">TCGA-KIRC</span><span class="tag">Expresión génica</span>
@@ -399,16 +717,18 @@
         <span class="tag">Bioinformática</span>
       </div>
       <div class="card-links">
-        <a href="proyectoParcial3/Proyecto3.html"   class="btn btn-green">🌐 Reporte</a>
-        <a href="proyectoParcial3/P3_608995.ipynb"  class="btn btn-dim">📓 Notebook</a>
+        <a href="proyectoParcial3/Proyecto3.html"  class="btn btn-green">🌐 Reporte</a>
+        <a href="proyectoParcial3/P3_608995.ipynb" class="btn btn-dim">📓 Notebook</a>
       </div>
     </div>
-
   </div>
 
-  <!-- TECH STACK -->
-  <div class="section-title">🛠️ Tecnologías</div>
-  <div class="tech-flex">
+  <!-- ── TECH STACK ─────────────────────────────────────────── -->
+  <div class="section-header reveal">
+    <span class="section-label"><span class="dot-label"></span>🛠️ Tecnologías</span>
+    <span class="line"></span>
+  </div>
+  <div class="tech-flex reveal">
     <div class="tech-pill"><span class="dot"></span>Python 3</div>
     <div class="tech-pill"><span class="dot"></span>Pandas</div>
     <div class="tech-pill"><span class="dot"></span>NumPy</div>
@@ -433,6 +753,44 @@
   José Ricardo Jáuregui Guevara · 608995 · Universidad de Monterrey · 2026
   &nbsp;·&nbsp; Todos los análisis realizados con integridad académica.
 </footer>
+
+<script>
+  /* ── Animated counters ─────────────────────────────────────── */
+  function animateCount(el, target, duration = 1200) {
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const counterObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const target = +e.target.dataset.target;
+        if (target) animateCount(e.target, target);
+        counterObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: .5 });
+
+  document.querySelectorAll('.n[data-target]').forEach(el => counterObs.observe(el));
+
+  /* ── Scroll reveal ─────────────────────────────────────────── */
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: .12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .card').forEach(el => revealObs.observe(el));
+</script>
 
 </body>
 </html>
