@@ -163,23 +163,23 @@
 <body>
 
 <div class="hero">
-  <div class="hero-tag">📊 Portafolio Académico · Parcial 1</div>
+  <div class="hero-tag">📊 Portafolio Académico · Parciales 1, 2 y 3</div>
   <h1>José Ricardo Jáuregui Guevara</h1>
   <p class="subtitle">Estadística y Ciencia de Datos</p>
   <p class="meta">Matrícula: 608995 &nbsp;·&nbsp; Universidad de Monterrey &nbsp;·&nbsp; Escuela de Ingeniería y Tecnologías &nbsp;·&nbsp; 2026</p>
 </div>
 
 <div class="stats">
-  <div class="stat"><div class="n">4</div><div class="l">Entregas</div></div>
-  <div class="stat"><div class="n">3</div><div class="l">Actividades</div></div>
-  <div class="stat"><div class="n">1</div><div class="l">Proyecto</div></div>
+  <div class="stat"><div class="n">12</div><div class="l">Entregas</div></div>
+  <div class="stat"><div class="n">9</div><div class="l">Actividades</div></div>
+  <div class="stat"><div class="n">3</div><div class="l">Proyectos</div></div>
   <div class="stat"><div class="n">58K+</div><div class="l">Filas analizadas</div></div>
 </div>
 
 <main>
 
-  <!-- ACTIVIDADES -->
-  <div class="section-title">📋 Actividades</div>
+  <!-- ACTIVIDADES PARCIAL 1 -->
+  <div class="section-title">📋 Actividades — Parcial 1</div>
   <div class="grid">
 
     <div class="card act">
@@ -229,7 +229,103 @@
 
   </div>
 
-  <!-- PROYECTO -->
+  <!-- ACTIVIDADES PARCIAL 2 -->
+  <div class="section-title">📋 Actividades — Parcial 2</div>
+  <div class="grid">
+
+    <div class="card act">
+      <div class="card-type">Actividad 2.1</div>
+      <h3>Regresión Logística y Validación Cruzada</h3>
+      <p class="desc">Clasificación de hogares mexicanos en tres niveles de ingreso (Bajo/Medio/Alto) usando Regresión Logística con Validación Cruzada Estratificada (StratifiedKFold). Análisis de curva ROC, matriz de confusión y reporte de clasificación sobre la ENIGH 2014.</p>
+      <div class="tags">
+        <span class="tag">Regresión Logística</span><span class="tag">Validación Cruzada</span>
+        <span class="tag">ROC-AUC</span><span class="tag">Scikit-learn</span>
+      </div>
+      <div class="card-links">
+        <a href="tarea4/Actividad2_1.html"               class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea4/A2_1_Regresion_Logistica.ipynb"  class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+    <div class="card act">
+      <div class="card-type">Actividad 2.2</div>
+      <h3>LDA y Árboles de Decisión</h3>
+      <p class="desc">Clasificación de nivel de ingreso con Análisis Discriminante Lineal (LDA) y Árboles de Decisión. Comparación de métricas de desempeño, visualización de frontera de decisión LDA y árbol podado sobre dataset ENIGH 2014.</p>
+      <div class="tags">
+        <span class="tag">LDA</span><span class="tag">Árbol de Decisión</span>
+        <span class="tag">Poda</span><span class="tag">Comparación de modelos</span>
+      </div>
+      <div class="card-links">
+        <a href="tarea5/Actividad2_2.html"   class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea5/A2_2_LDAArbol.ipynb" class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+    <div class="card act">
+      <div class="card-type">Actividad 2.3</div>
+      <h3>Ensambles, SVM y Redes Neuronales</h3>
+      <p class="desc">Evaluación de modelos avanzados de clasificación: Random Forest, Gradient Boosting, SVM y Red Neuronal MLP sobre la misma tarea de clasificación de ingreso hogar. Comparación sistemática de accuracy, F1 y tiempo de entrenamiento.</p>
+      <div class="tags">
+        <span class="tag">Random Forest</span><span class="tag">Gradient Boosting</span>
+        <span class="tag">SVM</span><span class="tag">MLP</span>
+      </div>
+      <div class="card-links">
+        <a href="tarea6/Actividad2_3.html"                      class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea6/A2_3_Ensamble_SVM_RedNeuronal.ipynb"   class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ACTIVIDADES PARCIAL 3 -->
+  <div class="section-title">📋 Actividades — Parcial 3</div>
+  <div class="grid">
+
+    <div class="card act">
+      <div class="card-type">Actividad 3.1</div>
+      <h3>PCA y Sistemas de Recomendación</h3>
+      <p class="desc">Reducción de dimensionalidad con PCA sobre el dataset de cáncer de mama (sklearn). Visualización en componentes principales, varianza explicada acumulada y exploración de sistemas de recomendación como aplicación de técnicas no supervisadas.</p>
+      <div class="tags">
+        <span class="tag">PCA</span><span class="tag">Reducción de dimensionalidad</span>
+        <span class="tag">Breast Cancer</span><span class="tag">No supervisado</span>
+      </div>
+      <div class="card-links">
+        <a href="tarea7/Actividad3_1.html" class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea7/PCA.ipynb"         class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+    <div class="card act">
+      <div class="card-type">Actividad 3.2</div>
+      <h3>Clustering — K-Means y Jerárquico</h3>
+      <p class="desc">Agrupamiento no supervisado con K-Means y Clustering Jerárquico sobre datos sintéticos. Selección del número óptimo de clústeres mediante el método del codo, silueta e índice de Rand ajustado. Visualización de dendrogramas y fronteras de clúster.</p>
+      <div class="tags">
+        <span class="tag">K-Means</span><span class="tag">Clustering Jerárquico</span>
+        <span class="tag">Silhouette</span><span class="tag">Dendrograma</span>
+      </div>
+      <div class="card-links">
+        <a href="tarea8/Actividad3_2.html" class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea8/Clustering.ipynb"  class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+    <div class="card act">
+      <div class="card-type">Actividad 3.3</div>
+      <h3>Pruebas Múltiples y Aprendizaje por Refuerzo</h3>
+      <p class="desc">Comparación de hipótesis múltiples con el dataset NCI60, correcciones de Bonferroni y FDR (Benjamini-Hochberg). Introducción al aprendizaje por refuerzo: agente Q-Learning en entorno de cuadrícula con análisis de política óptima.</p>
+      <div class="tags">
+        <span class="tag">Multiple Testing</span><span class="tag">Bonferroni</span>
+        <span class="tag">FDR</span><span class="tag">Q-Learning</span>
+      </div>
+      <div class="card-links">
+        <a href="tarea9/Actividad3_3.html"  class="btn btn-blue">🌐 Reporte</a>
+        <a href="tarea9/A3_3_608995.ipynb"  class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROYECTO PARCIAL 1 -->
   <div class="section-title">🏠 Proyecto Parcial 1</div>
   <div class="grid single">
 
@@ -258,6 +354,58 @@
 
   </div>
 
+  <!-- PROYECTO PARCIAL 2 -->
+  <div class="section-title">🏠 Proyecto Parcial 2</div>
+  <div class="grid single">
+
+    <div class="card project">
+      <div class="card-type">Proyecto Final · Parcial 2</div>
+      <h3>Clasificación de Nivel de Ingreso en Hogares Mexicanos (ENIGH 2014)</h3>
+      <p class="desc">
+        Comparación integral de modelos de clasificación supervisada para predecir el nivel de ingreso (Bajo/Medio/Alto) de <strong style="color:#cbd5e1">58,125 hogares mexicanos</strong>. Se evaluaron seis algoritmos: Regresión Logística, LDA, Árbol de Decisión, Random Forest, Gradient Boosting, SVM y Red Neuronal MLP, con validación cruzada estratificada y análisis de importancia de variables.
+        <br><br>
+        <strong style="color:#cbd5e1">Variables clave:</strong> <em>educa_jefe</em>, <em>est_socio</em>, <em>ocupados</em>. Análisis de curvas ROC multi-clase, matrices de confusión y reporte de clasificación por modelo.
+      </p>
+      <div class="tags">
+        <span class="tag">ENIGH 2014</span><span class="tag">Clasificación multi-clase</span>
+        <span class="tag">Regresión Logística</span><span class="tag">LDA</span>
+        <span class="tag">Random Forest</span><span class="tag">SVM</span>
+        <span class="tag">Gradient Boosting</span><span class="tag">MLP</span>
+      </div>
+      <div class="card-links">
+        <a href="proyectoParcial2/Proyecto2.html"   class="btn btn-green">🌐 Reporte</a>
+        <a href="proyectoParcial2/P2_608995.ipynb"  class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PROYECTO PARCIAL 3 -->
+  <div class="section-title">🏠 Proyecto Parcial 3</div>
+  <div class="grid single">
+
+    <div class="card project">
+      <div class="card-type">Proyecto Final · Parcial 3</div>
+      <h3>Agrupamiento de Pacientes con Cáncer Renal (TCGA-KIRC) mediante PCA y Clustering</h3>
+      <p class="desc">
+        Análisis no supervisado de datos de expresión génica de <strong style="color:#cbd5e1">pacientes con Carcinoma de Células Renales Claras (KIRC)</strong> del repositorio TCGA. Se aplica PCA para reducir la alta dimensionalidad (genes × muestras), seguido de K-Means y Clustering Jerárquico para identificar subtipos moleculares con relevancia clínica.
+        <br><br>
+        <strong style="color:#cbd5e1">Dataset:</strong> TCGA-KIRC (expresión génica STAR-TPM + datos clínicos + supervivencia). Evaluación con silhouette score, índice de Rand ajustado e integración con variables de supervivencia.
+      </p>
+      <div class="tags">
+        <span class="tag">TCGA-KIRC</span><span class="tag">Expresión génica</span>
+        <span class="tag">PCA</span><span class="tag">K-Means</span>
+        <span class="tag">Clustering Jerárquico</span><span class="tag">Silhouette</span>
+        <span class="tag">Bioinformática</span>
+      </div>
+      <div class="card-links">
+        <a href="proyectoParcial3/Proyecto3.html"   class="btn btn-green">🌐 Reporte</a>
+        <a href="proyectoParcial3/P3_608995.ipynb"  class="btn btn-dim">📓 Notebook</a>
+      </div>
+    </div>
+
+  </div>
+
   <!-- TECH STACK -->
   <div class="section-title">🛠️ Tecnologías</div>
   <div class="tech-flex">
@@ -269,6 +417,12 @@
     <div class="tech-pill"><span class="dot g"></span>Scikit-learn</div>
     <div class="tech-pill"><span class="dot g"></span>Statsmodels</div>
     <div class="tech-pill"><span class="dot g"></span>Random Forest</div>
+    <div class="tech-pill"><span class="dot g"></span>Gradient Boosting</div>
+    <div class="tech-pill"><span class="dot g"></span>SVM</div>
+    <div class="tech-pill"><span class="dot g"></span>Redes Neuronales (MLP)</div>
+    <div class="tech-pill"><span class="dot"></span>PCA</div>
+    <div class="tech-pill"><span class="dot"></span>K-Means</div>
+    <div class="tech-pill"><span class="dot y"></span>Q-Learning</div>
     <div class="tech-pill"><span class="dot"></span>Jupyter Notebook</div>
     <div class="tech-pill"><span class="dot"></span>GitHub Pages</div>
   </div>
